@@ -1,0 +1,17 @@
+# ignore virtual environment
+venv
+.idea
+/venv/*
+# ignore python cache files
+**/__pycache__/
+*.pyc
+
+# test
+.coverage
+
+# ignore env files
+.env
+
+.idea/
+
+/root/staticfiles/
