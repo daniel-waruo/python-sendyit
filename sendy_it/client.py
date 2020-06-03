@@ -59,11 +59,11 @@ class SendyIT:
     def get_delivery_quote(self, **kwargs):
         return self._request_delivery(request_type='quote', **kwargs)
 
-    def complete_delivery(self, order_no):
-        """Creates a delivery request obtaining rates and estimating time of arrival"""
-        url_path = '{}#complete'.format(self.api_url)
+    def _delivery_operations(self, operation, order_no):
+        """ Create a commone interface where all delivery specific operations will be performed """
+        url_path = '{}#{}'.format(self.api_url, operation)
         pay_load = {
-            'command': 'complete',
+            'command': operation,
             'data': {
                 **self.auth,
                 'order_no': order_no
@@ -80,47 +80,15 @@ class SendyIT:
         # check if response was successful else raise and error
         is_valid(response_data, raise_exception=True)
         return response_data
+
+    def complete_delivery(self, order_no):
+        """Creates a delivery request obtaining rates and estimating time of arrival"""
+        return self._delivery_operations('complete', order_no)
 
     def cancel_delivery(self, order_no):
         """ Cancels delivery of a certain good """
-        url_path = '{}#cancel'.format(self.api_url)
-        pay_load = {
-            'command': 'cancel',
-            'data': {
-                **self.auth,
-                'order_no': order_no
-            }
-        }
-        headers = {'content-type': 'application/json'}
-        response = requests.post(
-            url_path,
-            data=json.dumps(pay_load),
-            headers=headers
-        )
-        response.raise_for_status()
-        response_data = response.json()
-        # check if response was successful else raise and error
-        is_valid(response_data, raise_exception=True)
-        return response_data
+        return self._delivery_operations('cancel', order_no)
 
     def track_delivery(self, order_no):
         """ Tracks the delivery """
-        url_path = '{}#track'.format(self.api_url)
-        pay_load = {
-            'command': 'track',
-            'data': {
-                **self.auth,
-                'order_no': order_no
-            }
-        }
-        headers = {'content-type': 'application/json'}
-        response = requests.post(
-            url_path,
-            data=json.dumps(pay_load),
-            headers=headers
-        )
-        response.raise_for_status()
-        response_data = response.json()
-        # check if response was successful else raise and error
-        is_valid(response_data, raise_exception=True)
-        return response_data
+        return self._delivery_operations('track', order_no)
