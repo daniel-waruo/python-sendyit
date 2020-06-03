@@ -103,5 +103,24 @@ class SendyIT:
         is_valid(response_data, raise_exception=True)
         return response_data
 
-    def track_delivery(self):
-        pass
+    def track_delivery(self, order_no):
+        """ Tracks the delivery """
+        url_path = '{}#track'.format(self.api_url)
+        pay_load = {
+            'command': 'track',
+            'data': {
+                **self.auth,
+                'order_no': order_no
+            }
+        }
+        headers = {'content-type': 'application/json'}
+        response = requests.post(
+            url_path,
+            data=json.dumps(pay_load),
+            headers=headers
+        )
+        response.raise_for_status()
+        response_data = response.json()
+        # check if response was successful else raise and error
+        is_valid(response_data, raise_exception=True)
+        return response_data

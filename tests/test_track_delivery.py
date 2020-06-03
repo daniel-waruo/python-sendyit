@@ -1,10 +1,10 @@
-import unittest
-import json
+from unittest import TestCase
 from sendy_it.settings import SENDY_API_KEY, SENDY_USERNAME
 from sendy_it import SendyIT, Location, Person
+import json
 
 
-class CancelDeliveryTestCase(unittest.TestCase):
+class TrackDeliveryTestCase(TestCase):
     def setUp(self) -> None:
         self.sendy = SendyIT(SENDY_API_KEY, SENDY_USERNAME)
         self.response_data = self.sendy.make_delivery(
@@ -37,6 +37,6 @@ class CancelDeliveryTestCase(unittest.TestCase):
             )
         )
 
-    def test_cancel_delivery(self):
+    def test_track_delivery(self):
         order_no = self.response_data['data']['order_no']
-        self.sendy.cancel_delivery(order_no)
+        self.sendy.track_delivery(order_no)

@@ -41,6 +41,3 @@ class CompleteDeliveryTestCase(unittest.TestCase):
         order_no = self.response_data['data']['order_no']
         response = self.sendy.complete_delivery(order_no)
         self.assertEqual(response['trackingOrderNo'], order_no)
-
-        if __name__ == '__main__':
-            unittest.main()
