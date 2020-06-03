@@ -1,0 +1,49 @@
+Metadata-Version: 2.1
+Name: python-sendy-it
+Version: 0.0.1
+Summary: A python wrapper for the Sendy IT API
+Home-page: https://github.com/daniel-waruo/python-sendy-it
+Author: Daniel Waruo
+Author-email: waruodaniel@gmail.com
+License: UNKNOWN
+Description: #python-sendy-it
+        This is a python wrapper for the sendy It API.
+        It allows me to abstract sending requests and responses to the sendy api
+        
+        ##Prerequisites
+        In order for one to use this library one must have.
+        * python
+        
+        ## Installation
+        THe library can be installed by cloning the repository or
+        installing it using pip
+        
+        *clone the repository*
+        ```shell script
+        git clone https://github.com/daniel-waruo/python-sendyit.git
+        ``` 
+        
+        ####or
+        
+        *install via pip*
+        ```shell script
+        pip install git+https://github.com/daniel-waruo/python-sendyit.git
+        ``` 
+        
+        
+        ## Running the tests
+        To run the tests :-
+        
+        ```
+        python -m unittest 
+        ```
+        
+        ## Authors
+        
+        * **Daniel Waruo** - *contact* - waruodaniel@gmail.com
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
