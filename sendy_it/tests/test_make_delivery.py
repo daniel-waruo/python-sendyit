@@ -1,6 +1,7 @@
 import unittest
 from sendy_it.settings import SENDY_API_KEY, SENDY_USERNAME
-from sendy_it import SendyIT, Location, Person
+from sendy_it import SendyIT, Location, Person, Delivery, DeliveryItem
+from datetime import datetime, timedelta
 
 
 class MakeDeliveryTestCase(unittest.TestCase):
@@ -51,5 +52,47 @@ class MakeDeliveryTestCase(unittest.TestCase):
             sender=self.sender,
             to_location=self.to_location,
             from_location=self.from_location
+        )
+        self.assertEqual(data['data']['order_status'], 'quote_received')
+
+    def test_adding_delivery_details(self):
+        deliveries = Delivery(
+            items=[
+                DeliveryItem(
+                    name='laptop',
+                    weight='20'
+                ),
+                DeliveryItem(
+                    name='tv',
+                    weight='30'
+                )
+            ],
+            pickup_date=datetime.now(),
+            delivery_note='Receive this with care'
+        )
+        data = self.sendy.get_delivery_quote(
+            recipient=self.recipient,
+            sender=self.sender,
+            to_location=self.to_location,
+            from_location=self.from_location,
+            delivery_details=deliveries
+        )
+        self.assertEqual(data['data']['order_status'], 'quote_received')
+
+    def test_specifying_date_needed(self):
+        data = self.sendy.get_delivery_quote(
+            recipient=self.recipient,
+            sender=self.sender,
+            to_location=self.to_location,
+            from_location=self.from_location
+        )
+        self.assertEqual(data['data']['order_status'], 'quote_received')
+
+    def test_specifying_rider_phone(self):
+        data = self.sendy.get_delivery_quote(
+            recipient=self.recipient,
+            sender=self.sender,
+            to_location=self.to_location,
+            from_location=self.from_location,
         )
         self.assertEqual(data['data']['order_status'], 'quote_received')

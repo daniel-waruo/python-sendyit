@@ -1,5 +1,4 @@
 import unittest
-import json
 from sendy_it.settings import SENDY_API_KEY, SENDY_USERNAME
 from sendy_it import SendyIT, Location, Person
 
