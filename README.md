@@ -26,8 +26,9 @@ pip install git+https://github.com/daniel-waruo/python-sendyit.git
 ## Usage
 
 ```python
-from sendy_it import SendyIT,Person,Location
+from sendy_it import SendyIT,Person,Location,Delivery,DeliveryItem
 import os
+from datetime import datetime
 
 # get the api username and api key to instantiate SendyIT
 SENDY_USERNAME = os.getenv("SENDY_USERNAME")
@@ -71,6 +72,22 @@ to_location = Location(
     description='office',
     type='to'
 )
+
+# if one wants to specify more about the delivery
+deliveries = Delivery(
+    items=[
+        DeliveryItem(
+            name='laptop',
+            weight='20'
+        ),
+        DeliveryItem(
+            name='tv',
+            weight='30'
+        )
+    ],
+    pickup_date=datetime.now(),
+    delivery_note='Receive this with care'
+)
 ################################
 #     make delivery            #
 ################################
@@ -88,7 +105,8 @@ response_data = sendy.get_delivery_quote(
             recipient=recipient,
             sender=sender,
             to_location=to_location,
-            from_location=from_location
+            from_location=from_location,
+            delivery_details=deliveries
         )
 
 
