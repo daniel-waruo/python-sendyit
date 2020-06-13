@@ -9,8 +9,8 @@ sendy_it/client.py
 sendy_it/exceptions.py
 sendy_it/settings.py
 sendy_it/utils.py
-tests/__init__.py
-tests/test_cancel_delivery.py
-tests/test_complete_delivery.py
-tests/test_make_delivery.py
-tests/test_track_delivery.py
+sendy_it/tests/__init__.py
+sendy_it/tests/test_cancel_delivery.py
+sendy_it/tests/test_complete_delivery.py
+sendy_it/tests/test_make_delivery.py
+sendy_it/tests/test_track_delivery.py

@@ -34,8 +34,9 @@ Description: # python-sendy-it
         ## Usage
         
         ```python
-        from sendy_it import SendyIT,Person,Location
+        from sendy_it import SendyIT,Person,Location,Delivery,DeliveryItem
         import os
+        from datetime import datetime
         
         # get the api username and api key to instantiate SendyIT
         SENDY_USERNAME = os.getenv("SENDY_USERNAME")
@@ -79,6 +80,22 @@ Description: # python-sendy-it
             description='office',
             type='to'
         )
+        
+        # if one wants to specify more about the delivery
+        deliveries = Delivery(
+            items=[
+                DeliveryItem(
+                    name='laptop',
+                    weight='20'
+                ),
+                DeliveryItem(
+                    name='tv',
+                    weight='30'
+                )
+            ],
+            pickup_date=datetime.now(),
+            delivery_note='Receive this with care'
+        )
         ################################
         #     make delivery            #
         ################################
@@ -96,7 +113,8 @@ Description: # python-sendy-it
                     recipient=recipient,
                     sender=sender,
                     to_location=to_location,
-                    from_location=from_location
+                    from_location=from_location,
+                    delivery_details=deliveries
                 )
         
         

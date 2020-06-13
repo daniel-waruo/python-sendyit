@@ -1,2 +1,2 @@
 from .client import SendyIT
-from .utils import Location, Person
+from .utils import Location, Person, Delivery, DeliveryItem
